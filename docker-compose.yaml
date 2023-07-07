@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  database:
+    container_name: postgres
+    image: postgres:15.3-alpine
+    build: 
+      context: .
+      dockerfile: ./db/Dockerfile
+    environment:
+      - POSTGRES_DB=KristaDB
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=12345678
+    volumes:
+    #  - .:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5435:5432
+    expose:
+      - "5435"
+
+volumes:
+  pgdata:
